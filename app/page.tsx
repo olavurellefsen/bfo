@@ -198,6 +198,18 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Announcer link */}
+        <div className="flex justify-center mt-6 md:mt-8">
+          <a 
+            href="https://events.raceresult.com/presenters/?event=294902&n=Announcer&k=5cajZsrb0WL3" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-gray-600 hover:text-gray-800 text-sm transition-colors duration-200 underline decoration-gray-400 hover:decoration-gray-600"
+          >
+            Announcer
+          </a>
+        </div>
+
         {/* RaceResult Scripts */}
         <Script
           src="https://my.raceresult.com/RRPublish/load.js.php?lang=en"
