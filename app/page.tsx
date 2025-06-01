@@ -21,9 +21,9 @@ export default function Home() {
             <div className="text-center text-gray-600 text-sm mt-2">
               <div className="font-bold">Mannbrekka timing point</div>
               <ul className="text-sm text-gray-600 space-y-1">
-                <li>Half Marathon (runners): 8,3 km and 20,4 km</li>
+                <li>Half Marathon (runners): 8,3 km and 17,3 km</li>
                 <li>Marathon (runners): 8,3 km and 38,4 km</li>
-                <li>Half Marathon (walkers): 17 km</li>
+                <li>Half Marathon (walkers): 17,3 km</li>
               </ul>
             </div>
           </div>
