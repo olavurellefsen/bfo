@@ -9,6 +9,25 @@ const generateSessionId = () => {
   return 'session_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
 };
 
+// Visitor data interface
+interface VisitorData {
+  sessionId: string;
+  timestamp: string;
+  url: string;
+  referrer: string;
+  userAgent: string;
+  language: string;
+  timezone: string;
+  screenResolution: { width: number; height: number } | null;
+  viewportSize: { width: number; height: number } | null;
+  platform: string;
+  cookieEnabled: boolean;
+  onlineStatus: boolean;
+  localTime: string;
+  utcOffset: number;
+  eventType: 'page_visit' | 'heartbeat';
+}
+
 // Get visitor details
 const getVisitorDetails = (sessionId: string) => {
   const now = new Date();
@@ -38,7 +57,7 @@ const getVisitorDetails = (sessionId: string) => {
 };
 
 // Send tracking data to Flowcore webhook
-const sendTrackingData = async (data: any) => {
+const sendTrackingData = async (data: VisitorData) => {
   try {
     const response = await fetch('https://webhook.api.flowcore.io/event/bragdid/d7e28b3a-2c7b-44ff-ad54-01d0df856b24/bfo.2025/visitor.0?key=5595588b-5d94-4c8c-80cd-8d334b2f4899', {
       method: 'POST',
@@ -57,8 +76,8 @@ const sendTrackingData = async (data: any) => {
 };
 
 export default function Home() {
-  const sessionIdRef = useRef<string>();
-  const intervalRef = useRef<number>();
+  const sessionIdRef = useRef<string | undefined>(undefined);
+  const intervalRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     // Generate session ID on mount
