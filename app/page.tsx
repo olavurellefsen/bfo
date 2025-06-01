@@ -74,10 +74,20 @@ export default function Home() {
           strategy="afterInteractive"
           onLoad={() => {
             // Initialize RRPublish after the script loads
-            if (typeof window !== 'undefined' && (window as any).RRPublish) {
-              const rrp = new (window as any).RRPublish(document.getElementById("divRRPublish"), 294902, "live");
-              rrp.ShowTimerLogo = false;
-              rrp.ShowInfoText = false;
+            const globalWindow = window as unknown as {
+              RRPublish?: new (element: HTMLElement, eventId: number, type: string) => {
+                ShowTimerLogo: boolean;
+                ShowInfoText: boolean;
+              };
+            };
+            
+            if (typeof window !== 'undefined' && globalWindow.RRPublish) {
+              const element = document.getElementById("divRRPublish");
+              if (element) {
+                const rrp = new globalWindow.RRPublish(element, 294902, "live");
+                rrp.ShowTimerLogo = false;
+                rrp.ShowInfoText = false;
+              }
             }
           }}
         />
