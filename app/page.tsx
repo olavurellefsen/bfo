@@ -166,6 +166,14 @@ export default function Home() {
               >
                 Results
               </a>
+              <a 
+                href="https://events.raceresult.com/presenters/?event=294902&n=FM&k=83WFHlBevUqT" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-gray-800 text-xs transition-colors duration-200 underline decoration-gray-400 hover:decoration-gray-600 whitespace-nowrap"
+              >
+                FM
+              </a>
             </div>
           </div>
 
@@ -195,6 +203,14 @@ export default function Home() {
                 className="text-gray-600 hover:text-gray-800 text-sm transition-colors duration-200 underline decoration-gray-400 hover:decoration-gray-600"
               >
                 Live Results
+              </a>
+              <a 
+                href="https://events.raceresult.com/presenters/?event=294902&n=FM&k=83WFHlBevUqT" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-gray-800 text-sm transition-colors duration-200 underline decoration-gray-400 hover:decoration-gray-600"
+              >
+                FM
               </a>
             </div>
           </div>
