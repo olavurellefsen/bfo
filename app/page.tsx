@@ -29,36 +29,67 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Logo - Always below iframe */}
-        <div className="flex justify-center mb-6 md:mb-8">
-          <Image
-            src="/tmlogo.png"
-            alt="Tórshavn Marathon 2025"
-            width={400}
-            height={120}
-            className="h-12 md:h-16 lg:h-20 w-auto"
-            priority
-          />
-        </div>
+        {/* Logo and links - combined on mobile */}
+        <div className="flex flex-col md:flex-col items-center gap-4 md:gap-6 mb-6 md:mb-8">
+          {/* Mobile: Logo and links on same line */}
+          <div className="flex md:hidden items-center justify-center gap-4 w-full">
+            <Image
+              src="/tmlogo.png"
+              alt="Tórshavn Marathon 2025"
+              width={200}
+              height={60}
+              className="h-8 w-auto flex-shrink-0"
+              priority
+            />
+            <div className="flex gap-4">
+              <a 
+                href="https://torshavnmarathon.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-gray-800 text-xs transition-colors duration-200 underline decoration-gray-400 hover:decoration-gray-600 whitespace-nowrap"
+              >
+                Website
+              </a>
+              <a 
+                href="https://my.raceresult.com/294902/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-gray-800 text-xs transition-colors duration-200 underline decoration-gray-400 hover:decoration-gray-600 whitespace-nowrap"
+              >
+                Results
+              </a>
+            </div>
+          </div>
 
-        {/* Subtle links */}
-        <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8 mb-6 md:mb-8">
-          <a 
-            href="https://torshavnmarathon.com/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-gray-600 hover:text-gray-800 text-sm transition-colors duration-200 underline decoration-gray-400 hover:decoration-gray-600 text-center sm:text-left"
-          >
-            Official Website
-          </a>
-          <a 
-            href="https://my.raceresult.com/294902/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-gray-600 hover:text-gray-800 text-sm transition-colors duration-200 underline decoration-gray-400 hover:decoration-gray-600 text-center sm:text-left"
-          >
-            Live Results
-          </a>
+          {/* Desktop: Logo above, links below */}
+          <div className="hidden md:flex flex-col items-center gap-6">
+            <Image
+              src="/tmlogo.png"
+              alt="Tórshavn Marathon 2025"
+              width={400}
+              height={120}
+              className="h-16 lg:h-20 w-auto"
+              priority
+            />
+            <div className="flex gap-8">
+              <a 
+                href="https://torshavnmarathon.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-gray-800 text-sm transition-colors duration-200 underline decoration-gray-400 hover:decoration-gray-600"
+              >
+                Official Website
+              </a>
+              <a 
+                href="https://my.raceresult.com/294902/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-gray-800 text-sm transition-colors duration-200 underline decoration-gray-400 hover:decoration-gray-600"
+              >
+                Live Results
+              </a>
+            </div>
+          </div>
         </div>
 
         {/* RaceResult Live embed */}
