@@ -1,4 +1,7 @@
+'use client';
+
 import Image from 'next/image';
+import Script from 'next/script';
 
 export default function Home() {
   return (
@@ -15,6 +18,14 @@ export default function Home() {
               style={{border: 'none'}}
               allowFullScreen
             />
+            <div className="text-center text-gray-600 text-sm mt-2">
+              <div className="font-bold">Mannbrekka timing point</div>
+              <ul className="text-sm text-gray-600 space-y-1">
+                <li>Half Marathon (runners): 8,3 km and 20,4 km</li>
+                <li>Marathon (runners): 8,3 km and 38,4 km</li>
+                <li>Half Marathon (walkers): 17 km</li>
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -31,7 +42,7 @@ export default function Home() {
         </div>
 
         {/* Subtle links */}
-        <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8">
+        <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8 mb-6 md:mb-8">
           <a 
             href="https://torshavnmarathon.com/" 
             target="_blank" 
@@ -49,6 +60,27 @@ export default function Home() {
             Live Results
           </a>
         </div>
+
+        {/* RaceResult Live embed */}
+        <div className="flex justify-center">
+          <div className="bg-white rounded-lg shadow-lg p-4 w-full max-w-4xl">
+            <div id="divRRPublish" className="RRPublish"></div>
+          </div>
+        </div>
+
+        {/* RaceResult Scripts */}
+        <Script
+          src="https://my.raceresult.com/RRPublish/load.js.php?lang=en"
+          strategy="afterInteractive"
+          onLoad={() => {
+            // Initialize RRPublish after the script loads
+            if (typeof window !== 'undefined' && (window as any).RRPublish) {
+              const rrp = new (window as any).RRPublish(document.getElementById("divRRPublish"), 294902, "live");
+              rrp.ShowTimerLogo = false;
+              rrp.ShowInfoText = false;
+            }
+          }}
+        />
       </div>
     </main>
   );
