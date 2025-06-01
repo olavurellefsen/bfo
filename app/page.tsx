@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-gray-50 py-4 md:py-8">
@@ -16,10 +18,17 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Headline - Always below iframe */}
-        <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-center text-gray-800 mb-6 md:mb-8">
-          Tórshavn Marathon 2025
-        </h1>
+        {/* Logo - Always below iframe */}
+        <div className="flex justify-center mb-6 md:mb-8">
+          <Image
+            src="/tmlogo.png"
+            alt="Tórshavn Marathon 2025"
+            width={400}
+            height={120}
+            className="h-12 md:h-16 lg:h-20 w-auto"
+            priority
+          />
+        </div>
 
         {/* Subtle links */}
         <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8">
@@ -29,7 +38,7 @@ export default function Home() {
             rel="noopener noreferrer"
             className="text-gray-600 hover:text-gray-800 text-sm transition-colors duration-200 underline decoration-gray-400 hover:decoration-gray-600 text-center sm:text-left"
           >
-            Official Marathon Website
+            Official Website
           </a>
           <a 
             href="https://my.raceresult.com/294902/" 
