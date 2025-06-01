@@ -118,7 +118,16 @@ export default function Home() {
               allowFullScreen
             />
             <div className="text-center text-gray-600 text-sm mt-2">
-              <div className="font-bold">Mannbrekka timing point</div>
+              <div className="font-bold">
+                <a 
+                  href="https://events.raceresult.com/presenters/?event=294902&n=Mannbrekka&k=fxubo2vVTAzh" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-600 hover:text-gray-800 transition-colors duration-200 underline decoration-gray-400 hover:decoration-gray-600"
+                >
+                  Mannbrekka timing point
+                </a>
+              </div>
               <ul className="text-sm text-gray-600 space-y-1">
                 <li>Half Marathon (runners): 8,3 km and 17,3 km</li>
                 <li>Marathon (runners): 8,3 km and 38,4 km</li>
