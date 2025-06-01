@@ -2,8 +2,88 @@
 
 import Image from 'next/image';
 import Script from 'next/script';
+import { useEffect, useRef } from 'react';
+
+// Generate a unique session ID
+const generateSessionId = () => {
+  return 'session_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
+};
+
+// Get visitor details
+const getVisitorDetails = (sessionId: string) => {
+  const now = new Date();
+  
+  return {
+    sessionId,
+    timestamp: now.toISOString(),
+    url: typeof window !== 'undefined' ? window.location.href : '',
+    referrer: typeof window !== 'undefined' ? document.referrer : '',
+    userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : '',
+    language: typeof navigator !== 'undefined' ? navigator.language : '',
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    screenResolution: typeof window !== 'undefined' ? {
+      width: window.screen.width,
+      height: window.screen.height
+    } : null,
+    viewportSize: typeof window !== 'undefined' ? {
+      width: window.innerWidth,
+      height: window.innerHeight
+    } : null,
+    platform: typeof navigator !== 'undefined' ? navigator.platform : '',
+    cookieEnabled: typeof navigator !== 'undefined' ? navigator.cookieEnabled : false,
+    onlineStatus: typeof navigator !== 'undefined' ? navigator.onLine : true,
+    localTime: now.toLocaleString(),
+    utcOffset: now.getTimezoneOffset()
+  };
+};
+
+// Send tracking data to Flowcore webhook
+const sendTrackingData = async (data: any) => {
+  try {
+    const response = await fetch('https://webhook.api.flowcore.io/event/bragdid/d7e28b3a-2c7b-44ff-ad54-01d0df856b24/bfo.2025/visitor.0?key=5595588b-5d94-4c8c-80cd-8d334b2f4899', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    
+    if (!response.ok) {
+      console.warn('Failed to send tracking data:', response.status);
+    }
+  } catch (error) {
+    console.warn('Error sending tracking data:', error);
+  }
+};
 
 export default function Home() {
+  const sessionIdRef = useRef<string>();
+  const intervalRef = useRef<number>();
+
+  useEffect(() => {
+    // Generate session ID on mount
+    sessionIdRef.current = generateSessionId();
+    
+    // Send initial tracking data
+    const initialData = getVisitorDetails(sessionIdRef.current);
+    sendTrackingData({ ...initialData, eventType: 'page_visit' });
+    
+    // Set up interval to send data every 30 seconds
+    intervalRef.current = window.setInterval(() => {
+      if (sessionIdRef.current) {
+        const heartbeatData = getVisitorDetails(sessionIdRef.current);
+        sendTrackingData({ ...heartbeatData, eventType: 'heartbeat' });
+      }
+    }, 30000); // 30 seconds
+
+    // Cleanup interval on unmount
+    return () => {
+      if (intervalRef.current !== undefined) {
+        window.clearInterval(intervalRef.current);
+      }
+    };
+  }, []);
+
   return (
     <main className="min-h-screen bg-gray-50 py-4 md:py-8">
       <div className="container mx-auto px-4">
