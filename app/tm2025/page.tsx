@@ -75,6 +75,16 @@ const sendTrackingData = async (data: VisitorData) => {
   }
 };
 
+// Handle link click tracking
+const handleLinkClick = (linkName: string, url: string, sessionId: string) => {
+  const clickData = getVisitorDetails(sessionId);
+  sendTrackingData({ 
+    ...clickData, 
+    eventType: 'page_visit', // Using page_visit type but could be extended to 'link_click'
+    url: `click:${linkName}:${url}` // Modified URL to indicate this is a click event
+  });
+};
+
 export default function TM2025() {
   const sessionIdRef = useRef<string | undefined>(undefined);
   const intervalRef = useRef<number | undefined>(undefined);
@@ -123,6 +133,7 @@ export default function TM2025() {
                   href="https://events.raceresult.com/presenters/?event=294902&n=Mannbrekka&k=fxubo2vVTAzh" 
                   target="_blank" 
                   rel="noopener noreferrer"
+                  onClick={() => sessionIdRef.current && handleLinkClick('Mannbrekka Timing Point', 'https://events.raceresult.com/presenters/?event=294902&n=Mannbrekka&k=fxubo2vVTAzh', sessionIdRef.current)}
                   className="text-gray-600 hover:text-gray-800 transition-colors duration-200 underline decoration-gray-400 hover:decoration-gray-600"
                 >
                   Mannbrekka timing point
@@ -154,6 +165,7 @@ export default function TM2025() {
                 href="https://torshavnmarathon.com/" 
                 target="_blank" 
                 rel="noopener noreferrer"
+                onClick={() => sessionIdRef.current && handleLinkClick('Website', 'https://torshavnmarathon.com/', sessionIdRef.current)}
                 className="text-gray-600 hover:text-gray-800 text-xs transition-colors duration-200 underline decoration-gray-400 hover:decoration-gray-600 whitespace-nowrap"
               >
                 Website
@@ -162,6 +174,7 @@ export default function TM2025() {
                 href="https://my.raceresult.com/294902/" 
                 target="_blank" 
                 rel="noopener noreferrer"
+                onClick={() => sessionIdRef.current && handleLinkClick('Results', 'https://my.raceresult.com/294902/', sessionIdRef.current)}
                 className="text-gray-600 hover:text-gray-800 text-xs transition-colors duration-200 underline decoration-gray-400 hover:decoration-gray-600 whitespace-nowrap"
               >
                 Results
@@ -170,6 +183,7 @@ export default function TM2025() {
                 href="https://events.raceresult.com/presenters/?event=294902&n=FM&k=83WFHlBevUqT" 
                 target="_blank" 
                 rel="noopener noreferrer"
+                onClick={() => sessionIdRef.current && handleLinkClick('FM', 'https://events.raceresult.com/presenters/?event=294902&n=FM&k=83WFHlBevUqT', sessionIdRef.current)}
                 className="text-gray-600 hover:text-gray-800 text-xs transition-colors duration-200 underline decoration-gray-400 hover:decoration-gray-600 whitespace-nowrap"
               >
                 FM
@@ -192,6 +206,7 @@ export default function TM2025() {
                 href="https://torshavnmarathon.com/" 
                 target="_blank" 
                 rel="noopener noreferrer"
+                onClick={() => sessionIdRef.current && handleLinkClick('Official Website', 'https://torshavnmarathon.com/', sessionIdRef.current)}
                 className="text-gray-600 hover:text-gray-800 text-sm transition-colors duration-200 underline decoration-gray-400 hover:decoration-gray-600"
               >
                 Official Website
@@ -200,6 +215,7 @@ export default function TM2025() {
                 href="https://my.raceresult.com/294902/" 
                 target="_blank" 
                 rel="noopener noreferrer"
+                onClick={() => sessionIdRef.current && handleLinkClick('Live Results', 'https://my.raceresult.com/294902/', sessionIdRef.current)}
                 className="text-gray-600 hover:text-gray-800 text-sm transition-colors duration-200 underline decoration-gray-400 hover:decoration-gray-600"
               >
                 Live Results
@@ -208,6 +224,7 @@ export default function TM2025() {
                 href="https://events.raceresult.com/presenters/?event=294902&n=FM&k=83WFHlBevUqT" 
                 target="_blank" 
                 rel="noopener noreferrer"
+                onClick={() => sessionIdRef.current && handleLinkClick('FM', 'https://events.raceresult.com/presenters/?event=294902&n=FM&k=83WFHlBevUqT', sessionIdRef.current)}
                 className="text-gray-600 hover:text-gray-800 text-sm transition-colors duration-200 underline decoration-gray-400 hover:decoration-gray-600"
               >
                 FM
@@ -229,6 +246,7 @@ export default function TM2025() {
             href="https://events.raceresult.com/presenters/?event=294902&n=Announcer&k=5cajZsrb0WL3" 
             target="_blank" 
             rel="noopener noreferrer"
+            onClick={() => sessionIdRef.current && handleLinkClick('Announcer', 'https://events.raceresult.com/presenters/?event=294902&n=Announcer&k=5cajZsrb0WL3', sessionIdRef.current)}
             className="text-gray-600 hover:text-gray-800 text-sm transition-colors duration-200 underline decoration-gray-400 hover:decoration-gray-600"
           >
             Announcer
